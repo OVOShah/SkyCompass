@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="E:\SkyCompass\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="E:\SkyCompass\app\build\intermediates\pre-dexed\debug\classes-fdc4068286c8b7fb6211cdbd9df6e2fa3c10e156.jar" />
+    </item>
+    <item
+        jar="E:\SkyCompass\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="E:\SkyCompass\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-edca88edd267cedcb58a638044d25f996e9d4fad.jar" />
+    </item>
+    <item
+        jar="C:\Users\Co-op 2\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="E:\SkyCompass\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-18c61612fd672ebb046219d2eb5ab170c00ff77e.jar" />
+    </item>
+    <item
+        jar="E:\SkyCompass\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="E:\SkyCompass\app\build\intermediates\pre-dexed\debug\classes-faf2f5fb5e71eb1c1bb540c3cbaac5022e3f78d4.jar" />
+    </item>
+
+</items>

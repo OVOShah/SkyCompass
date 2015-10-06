@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sky Compass</string>
+    <string name="action_settings">Settings</string>
+    <string name="worldOverlay">worldOverlay</string>
+    <string name="initialDegree">0</string>
+    <string name="skinsButton">Skins</string>
+    <string name="feedbackButton">Feedback</string>
+    <string name="skyCompass">Sky Compass</string>
+    <string name="myEmail">skybananastudios@gmail.com</string>
+
+</resources>
+
