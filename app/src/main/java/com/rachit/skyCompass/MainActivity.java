@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.Sensor;
@@ -12,11 +13,13 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,6 +44,9 @@ public class MainActivity extends Activity implements SensorEventListener{
     public ImageView compass;
 
     private RelativeLayout myLayout;
+
+    public static final String PREFS_NAME = "MyPrefsFile1";
+    public CheckBox dontShowAgain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +83,31 @@ public class MainActivity extends Activity implements SensorEventListener{
         // for the system's orientation sensor registered listeners
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
                 SensorManager.SENSOR_DELAY_GAME);
+
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        LayoutInflater adbInflater = LayoutInflater.from(this);
+        View eulaLayout = adbInflater.inflate(R.layout.checkbox, null);
+        dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
+        adb.setView(eulaLayout);
+        adb.setTitle("Calibration");
+        adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                String checkBoxResult = "NOT checked";
+                if (dontShowAgain.isChecked())
+                    checkBoxResult = "checked";
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("skipMessage", checkBoxResult);
+                // Commit the edits!
+                editor.commit();
+                return;
+            }
+        });
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        String skipMessage = settings.getString("skipMessage", "NOT checked");
+        if (!skipMessage.equals("checked"))
+            adb.show();
     }
 
     @Override
