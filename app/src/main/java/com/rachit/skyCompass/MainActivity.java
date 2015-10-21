@@ -19,7 +19,6 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,24 +28,18 @@ public class MainActivity extends Activity implements SensorEventListener{
     // define the display assembly compass picture
     private ImageView image;
 
-    // record the compass picture angle turned
+    // record the compass picture angle
     private float currentDegree = 0f;
 
     // device sensor manager
     private SensorManager mSensorManager;
 
     public TextView tvHeading;
-
     public ImageView worldOverlay;
-
     public int apiVersion = Build.VERSION.SDK_INT;
-
     public ImageView compass;
-
     private RelativeLayout myLayout;
-
     public static final String PREFS_NAME = "MyPrefsFile1";
-    public CheckBox dontShowAgain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +49,10 @@ public class MainActivity extends Activity implements SensorEventListener{
         // our compass image
         image = (ImageView) findViewById(R.id.imageViewCompass);
 
-        // TextView that will tell the user what degree is the heading
+        // TextView that will tell the user the heading degree
         tvHeading = (TextView) findViewById(R.id.tvHeading);
 
-        // initialize your android device sensor capabilities
+        // initialize device sensor capabilities
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         Button skinsButton = (Button) findViewById((R.id.skinsButton));
@@ -84,23 +77,25 @@ public class MainActivity extends Activity implements SensorEventListener{
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
                 SensorManager.SENSOR_DELAY_GAME);
 
+        // alert dialogue to remind user to calibrate phone's sensors
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         LayoutInflater adbInflater = LayoutInflater.from(this);
         View eulaLayout = adbInflater.inflate(R.layout.checkbox, null);
-        dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
         adb.setView(eulaLayout);
         adb.setTitle("Calibration");
         adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                String checkBoxResult = "NOT checked";
-                if (dontShowAgain.isChecked())
-                    checkBoxResult = "checked";
+                return;
+            }
+        });
+        adb.setNegativeButton("Don't show again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String checkBoxResult = "checked";
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("skipMessage", checkBoxResult);
-                // Commit the edits!
                 editor.commit();
-                return;
             }
         });
 
@@ -128,7 +123,7 @@ public class MainActivity extends Activity implements SensorEventListener{
         // get the angle around the z-axis rotated
         int degree = Math.round(event.values[0]);
 
-        //Change degree heading, add direction indicator
+        // change degree heading, add direction indicator
         String toDisplay = Integer.toString(degree)+"°";
 
         if ( degree > 337.5 | degree <= 22.5 ){
@@ -158,7 +153,7 @@ public class MainActivity extends Activity implements SensorEventListener{
 
             tvHeading.setText(toDisplay);
 
-            // create a rotation animation (reverse turn degree degrees)
+            // Create a rotation animation (reverse turn degree degrees)
             RotateAnimation ra = new RotateAnimation(
                     currentDegree,
                     -degree,
